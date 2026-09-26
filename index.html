@@ -1,515 +1,312 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Tổ 4 của tôi</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    box-sizing: border-box;
-    --sky: #E7F7FA;
-    --sky2: #EAF0FF;
-    --card: #FFFFFF;
-    --ink: #223140;
-    --muted: #64758A;
-    --mint: #22C3A6;
-    --blue: #3E8BFF;
-    --coral: #FF6B7A;
-    --line: #E1EAF0;
-    --shadow: rgba(62, 139, 255, 0.16);
-    padding-top: env(safe-area-inset-top, 0px);
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --sky: #10181F; --sky2: #121A24; --card: #182430; --ink: #EAF2F8;
-      --muted: #93A5B8; --mint: #38D9BC; --blue: #5FA0FF; --coral: #FF8792;
-      --line: #253442; --shadow: rgba(0,0,0,0.35);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang Thông Tin Tổ 4 - Lớp 8A6</title>
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --admin-color: #dc2626;
     }
-  }
-  :root[data-theme="dark"] {
-    --sky: #10181F; --sky2: #121A24; --card: #182430; --ink: #EAF2F8;
-    --muted: #93A5B8; --mint: #38D9BC; --blue: #5FA0FF; --coral: #FF8792;
-    --line: #253442; --shadow: rgba(0,0,0,0.35);
-  }
-  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    min-height: 100%;
-    background: linear-gradient(160deg, var(--sky) 0%, var(--sky2) 100%);
-    color: var(--ink);
-    font-family: 'Be Vietnam Pro', system-ui, sans-serif;
-    line-height: 1.6;
-  }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
-
-  header.hero { text-align: center; padding: 1rem 0 2.5rem; animation: rise .7s ease-out both; }
-  .eyebrow {
-    display: inline-block;
-    font-weight: 600;
-    font-size: .95rem;
-    color: var(--blue);
-    background: color-mix(in srgb, var(--blue) 12%, transparent);
-    padding: .35rem 1rem;
-    border-radius: 999px;
-    margin: 0 0 .9rem;
-  }
-  h1 {
-    font-family: 'Baloo 2', 'Be Vietnam Pro', sans-serif;
-    font-weight: 800;
-    font-size: clamp(2.6rem, 7vw, 4rem);
-    line-height: 1.05;
-    margin: 0;
-    background: linear-gradient(100deg, var(--blue), var(--mint));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-
-  .intro {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    padding: 1.9rem 2.2rem;
-    max-width: 66ch;
-    margin: 0 auto 3.2rem;
-    box-shadow: 0 12px 28px -18px var(--shadow);
-  }
-  .intro .label {
-    font-family: 'Baloo 2', sans-serif;
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: var(--mint);
-    margin: 0 0 .6rem;
-  }
-  .intro p { margin: 0; color: var(--ink); }
-
-  h2.section-title {
-    font-family: 'Baloo 2', sans-serif;
-    font-weight: 700;
-    font-size: 1.6rem;
-    text-align: center;
-    margin: 0 0 1.6rem;
-  }
-
-  .grid {
-    display: grid;
-    gap: 1.3rem;
-    grid-template-columns: 1fr;
-    margin-bottom: 3.5rem;
-  }
-  @media (min-width: 620px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 960px) { .grid { grid-template-columns: repeat(3, 1fr); } }
-
-  .card-slot { perspective: 1200px; height: 240px; }
-  .card {
-    position: relative;
-    width: 100%; height: 100%;
-    cursor: pointer;
-    transition: transform .55s cubic-bezier(.2,.8,.2,1);
-    transform-style: preserve-3d;
-  }
-  .card.flipped { transform: rotateY(180deg); }
-  .face {
-    position: absolute; inset: 0;
-    border-radius: 18px;
-    backface-visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    padding: 1.3rem 1.2rem;
-    border: 1px solid var(--line);
-    box-shadow: 0 10px 24px -16px var(--shadow);
-    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-  }
-  .card-slot:hover .face.front { transform: translateY(-4px) scale(1.02); border-color: var(--mint); box-shadow: 0 18px 30px -16px var(--shadow); }
-  .face.front { background: var(--card); align-items: center; text-align: center; justify-content: center; gap: .55rem; }
-
-  /* Avatar: ảnh thật, bo tròn, object-fit cover để không méo tỉ lệ.
-     Nếu ảnh chưa tồn tại (chưa upload), tự động hiện số thay thế. */
-  .avatar {
-    width: 64px; height: 64px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Baloo 2', sans-serif;
-    font-weight: 700; font-size: 1.4rem;
-    color: #fff;
-    background: linear-gradient(135deg, var(--blue), var(--mint));
-    overflow: hidden;
-    flex: 0 0 auto;
-  }
-  .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .avatar .fallback { display: none; }
-
-  .name { font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 1.05rem; margin: 0; }
-  .bio { color: var(--muted); font-size: .9rem; margin: 0; }
-  .tap-hint { font-size: .78rem; color: var(--blue); margin-top: .2rem; }
-
-  .face.back {
-    background: linear-gradient(135deg, var(--coral), var(--blue));
-    color: #fff;
-    transform: rotateY(180deg);
-    align-items: center; justify-content: center; text-align: center; gap: .5rem;
-  }
-  .back .quote-label { font-size: .78rem; opacity: .85; letter-spacing: .02em; margin: 0; }
-  .back .quote { font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 1.05rem; margin: 0; }
-
-  /* ---- Tin Hot Của Tổ ---- */
-  section.hot { margin-bottom: 3rem; }
-  .news-list {
-    display: grid;
-    gap: 1rem;
-  }
-  .news-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 1.3rem 1.5rem;
-    box-shadow: 0 10px 24px -18px var(--shadow);
-  }
-  .news-card .news-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .news-card .news-title {
-    font-family: 'Baloo 2', sans-serif;
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin: 0;
-    color: var(--blue);
-  }
-  .news-card .news-date { font-size: .82rem; color: var(--muted); white-space: nowrap; }
-  .news-card .news-desc { margin: .5rem 0 0; color: var(--ink); font-size: .95rem; }
-  .news-card .news-link {
-    display: inline-block;
-    margin-top: .8rem;
-    margin-right: .5rem;
-    font-size: .85rem;
-    font-weight: 600;
-    color: #fff;
-    background: linear-gradient(135deg, var(--mint), var(--blue));
-    padding: .45rem 1rem;
-    border-radius: 999px;
-    text-decoration: none;
-  }
-  .news-card .news-file {
-    display: inline-flex;
-    align-items: center;
-    gap: .4rem;
-    margin-top: .8rem;
-    font-size: .85rem;
-    font-weight: 600;
-    color: var(--blue);
-    background: color-mix(in srgb, var(--blue) 10%, transparent);
-    padding: .45rem 1rem;
-    border-radius: 999px;
-    text-decoration: none;
-  }
-  .news-card .file-thumb {
-    display: block;
-    max-width: 220px;
-    max-height: 160px;
-    border-radius: 10px;
-    margin-top: .8rem;
-    border: 1px solid var(--line);
-  }
-
-  /* ---- Form thêm tin mới ---- */
-  section.add-news {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    padding: 1.9rem 2.2rem;
-    max-width: 640px;
-    margin: 0 auto;
-    box-shadow: 0 12px 28px -18px var(--shadow);
-  }
-  section.add-news h3 {
-    font-family: 'Baloo 2', sans-serif;
-    font-size: 1.15rem;
-    margin: 0 0 1rem;
-    color: var(--mint);
-  }
-  .field { margin-bottom: 1rem; }
-  .field label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: .35rem; color: var(--muted); }
-  .field input, .field textarea {
-    width: 100%;
-    padding: .65rem .8rem;
-    border-radius: 10px;
-    border: 1px solid var(--line);
-    background: var(--sky);
-    color: var(--ink);
-    font-family: inherit;
-    font-size: .95rem;
-  }
-  .field textarea { resize: vertical; min-height: 70px; }
-  .field input[type="file"] {
-    padding: .5rem .6rem;
-    background: var(--sky);
-    cursor: pointer;
-  }
-  .file-hint { font-size: .78rem; color: var(--muted); margin: .35rem 0 0; }
-  .submit-btn {
-    border: none;
-    cursor: pointer;
-    font-family: 'Baloo 2', sans-serif;
-    font-weight: 700;
-    font-size: .95rem;
-    color: #fff;
-    background: linear-gradient(135deg, var(--blue), var(--mint));
-    padding: .7rem 1.4rem;
-    border-radius: 999px;
-  }
-  .form-note { font-size: .78rem; color: var(--muted); margin-top: .8rem; }
-
-  footer.hint { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 3rem; }
-</style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    header {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .user-profile img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+    }
+    .badge-admin {
+      background: var(--admin-color);
+      color: white;
+      font-size: 0.75rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    .card {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+    }
+    .post-form textarea, .post-form input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+    .btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .btn:hover { opacity: 0.9; }
+    .btn-danger {
+      background: var(--admin-color);
+      padding: 4px 8px;
+      font-size: 0.8rem;
+    }
+    .news-item {
+      border-bottom: 1px solid #e2e8f0;
+      padding: 15px 0;
+      position: relative;
+    }
+    .news-item:last-child { border-bottom: none; }
+    .news-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
+    .news-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+    .file-attachment {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+    .file-attachment:hover { background: #dbeafe; }
+    .actions {
+      margin-top: 8px;
+      display: flex;
+      justify-content: flex-end;
+    }
+  </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header class="hero">
-    <span class="eyebrow">Lớp học của chúng tôi</span>
-    <h1>Tổ 4 của tôi</h1>
+<div class="container">
+  <header>
+    <h2>🔥 Bảng Tin Hot - Tổ 4 Lớp 8A6</h2>
+    <div id="auth-section">
+      <div id="g_id_onload"
+           data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
+           data-callback="handleCredentialResponse">
+      </div>
+      <div class="g_id_signin" data-type="standard"></div>
+    </div>
+    <div id="user-section" class="user-profile" style="display: none;">
+      <img id="user-avatar" src="" alt="Avatar">
+      <div>
+        <span id="user-name" style="font-weight: bold;"></span>
+        <span id="admin-badge" class="badge-admin" style="display: none;">ADMIN</span>
+      </div>
+      <button class="btn" style="background:#64748b;" onclick="logout()">Đăng xuất</button>
+    </div>
   </header>
 
-  <div class="intro">
-    <p class="label">Giới thiệu về Tổ 4</p>
-    <p>Tổ 4 là một tập thể nhỏ nhưng đầy năng lượng, luôn sẵn sàng hỗ trợ nhau trong học tập và các hoạt động của lớp. Mỗi thành viên đều mang một màu sắc riêng, cùng nhau tạo nên một Tổ 4 gắn kết, vui vẻ và không ngừng cố gắng.</p>
+  <!-- Khung Đăng Tin -->
+  <div class="card post-form">
+    <h3>Đăng tin / Thông báo mới</h3>
+    <input type="text" id="post-title" placeholder="Tiêu đề thông báo...">
+    <textarea id="post-content" rows="3" placeholder="Nội dung thông báo (tự động xóa sau 24h)..."></textarea>
+    <input type="text" id="post-file" placeholder="Đường link File / Ảnh đính kèm (nếu có)...">
+    <button class="btn" onclick="addNews()">Đăng Tin</button>
   </div>
 
-  <section class="members">
-    <div class="grid" id="memberGrid"></div>
-  </section>
-
-  <section class="hot">
-    <h2 class="section-title">🔥 Tin Hot Của Tổ</h2>
-    <div class="news-list" id="newsList"></div>
-  </section>
-
-  <section class="add-news">
-    <h3>✍️ Đăng tin mới</h3>
-    <form id="newsForm">
-      <div class="field">
-        <label for="newsTitle">Tiêu đề</label>
-        <input type="text" id="newsTitle" required placeholder="VD: Lịch kiểm tra tuần tới">
-      </div>
-      <div class="field">
-        <label for="newsContent">Nội dung</label>
-        <textarea id="newsContent" required placeholder="Mô tả ngắn gọn nội dung tin..."></textarea>
-      </div>
-      <div class="field">
-        <label for="newsLink">Link đính kèm (không bắt buộc)</label>
-        <input type="text" id="newsLink" placeholder="https://drive.google.com/...">
-      </div>
-      <div class="field">
-        <label for="newsFile">Hoặc tải tệp lên (ảnh, PDF, Word, Excel, video, zip...)</label>
-        <input type="file" id="newsFile" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar,.mp3,.mp4,.txt">
-        <p class="file-hint" id="fileHint">Giới hạn khoảng 3MB/tệp (do lưu tạm trong trình duyệt).</p>
-      </div>
-      <button type="submit" class="submit-btn">Đăng tin</button>
-      <p class="form-note">Tin và tệp đăng ở đây chỉ lưu trong trình duyệt của bạn (localStorage) để xem thử — người khác truy cập trang sẽ không thấy tệp thật. Muốn tin (kèm link tệp Drive/GitHub) hiện cho mọi người, hãy thêm cố định vào mảng <code>staticNews</code> trong file HTML (xem hướng dẫn trong code).</p>
-    </form>
-  </section>
-
-  <footer class="hint">Chạm hoặc bấm vào thẻ thành viên để xem sở thích / câu nói yêu thích.</footer>
+  <!-- Danh Sách Tin Hot -->
+  <div class="card">
+    <h3>Tin Tức Cập Nhật</h3>
+    <div id="news-list"></div>
+  </div>
 </div>
 
 <script>
-  /* ============ DANH SÁCH THÀNH VIÊN ============
-     Đổi tên, mô tả, câu nói tại đây. Ảnh lấy theo đúng số thứ tự:
-     1.jpg, 2.jpg ... 10.jpg (hoặc đổi đuôi .png bên dưới trong hàm render). */
-  var members = [
-    { name: "Thành viên 1", bio: "Lớp trưởng của Tổ 4, thích môn Toán.", quote: "Cố gắng hết mình mỗi ngày!" },
-    { name: "Thành viên 2", bio: "Yêu thích vẽ tranh và âm nhạc.", quote: "Sáng tạo không giới hạn." },
-    { name: "Thành viên 3", bio: "Đam mê bóng đá, hay đá bóng giờ ra chơi.", quote: "Chiến thắng bắt đầu từ tinh thần đồng đội." },
-    { name: "Thành viên 4", bio: "Thích đọc sách và kể chuyện vui.", quote: "Một cuốn sách, một thế giới mới." },
-    { name: "Thành viên 5", bio: "Giỏi tiếng Anh, hay giúp bạn học từ vựng.", quote: "Học một ngôn ngữ là mở một cánh cửa." },
-    { name: "Thành viên 6", bio: "Yêu thiên nhiên, thích trồng cây.", quote: "Mỗi ngày một điều tốt đẹp." },
-    { name: "Thành viên 7", bio: "Thích chơi cờ vua và giải đố.", quote: "Suy nghĩ chậm, hành động chắc." },
-    { name: "Thành viên 8", bio: "Năng động, thích tham gia hoạt động ngoại khóa.", quote: "Vui là chính, học là phụ... mà học cũng vui!" },
-    { name: "Thành viên 9", bio: "Thích nấu ăn và làm bánh cùng gia đình.", quote: "Nấu ăn bằng cả trái tim." },
-    { name: "Thành viên 10", bio: "Yêu âm nhạc, chơi đàn guitar.", quote: "Âm nhạc kết nối mọi người." }
-  ];
+  const ADMIN_EMAIL = "06.08.2012.minhdat@gmail.com";
+  let currentUser = null;
 
-  var grid = document.getElementById('memberGrid');
-  members.forEach(function (m, i) {
-    var n = i + 1;
-    var slot = document.createElement('div');
-    slot.className = 'card-slot';
-    slot.innerHTML =
-      '<div class="card">' +
-        '<div class="face front">' +
-          '<div class="avatar">' +
-            '<img src="' + n + '.jpg" alt="Ảnh ' + m.name + '" ' +
-              'onerror="this.onerror=null; this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';">' +
-            '<span class="fallback" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;">' + n + '</span>' +
-          '</div>' +
-          '<p class="name">' + m.name + '</p>' +
-          '<p class="bio">' + m.bio + '</p>' +
-          '<p class="tap-hint">Bấm để xem thêm ✨</p>' +
-        '</div>' +
-        '<div class="face back">' +
-          '<p class="quote-label">CÂU NÓI YÊU THÍCH</p>' +
-          '<p class="quote">&ldquo;' + m.quote + '&rdquo;</p>' +
-        '</div>' +
-      '</div>';
-    var card = slot.querySelector('.card');
-    card.addEventListener('click', function () { card.classList.toggle('flipped'); });
-    grid.appendChild(slot);
-  });
-
-  /* ============ TIN HOT CỦA TỔ ============
-     CÁCH THÊM TIN CỐ ĐỊNH (hiện cho MỌI người truy cập, không cần localStorage):
-     Chỉ cần thêm một object mới vào mảng staticNews bên dưới, theo đúng mẫu:
-     { title: "Tiêu đề tin", date: "20/09/2026", desc: "Mô tả ngắn.", link: "https://..." }
-     link có thể để trống "" nếu không có tệp/đường dẫn đính kèm. */
-  var staticNews = [
-    {
-      title: "Chào mừng đến với trang Tổ 4!",
-      date: "26/09/2026",
-      desc: "Đây là trang thông tin chung của Tổ 4. Mọi tin tức, thông báo quan trọng sẽ được cập nhật tại đây.",
-      link: ""
-    }
-  ];
-
-  var LS_KEY = 'to4_news_local';
-
-  function loadLocalNews() {
-    try {
-      var raw = localStorage.getItem(LS_KEY);
-      return raw ? JSON.parse(raw) : [];
-    } catch (e) {
-      return [];
-    }
+  // Giải mã JWT Token từ Google Sign-In
+  function parseJwt(token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
   }
 
-  function saveLocalNews(list) {
-    try { localStorage.setItem(LS_KEY, JSON.stringify(list)); } catch (e) {}
+  function handleCredentialResponse(response) {
+    const data = parseJwt(response.credential);
+    currentUser = {
+      name: data.name,
+      email: data.email,
+      picture: data.picture,
+      isAdmin: data.email === ADMIN_EMAIL
+    };
+    updateUIAuth();
+  }
+
+  function updateUIAuth() {
+    if (currentUser) {
+      document.getElementById('auth-section').style.display = 'none';
+      document.getElementById('user-section').style.display = 'flex';
+      document.getElementById('user-avatar').src = currentUser.picture;
+      document.getElementById('user-name').innerText = currentUser.name;
+      if (currentUser.isAdmin) {
+        document.getElementById('admin-badge').style.display = 'inline-block';
+      }
+    } else {
+      document.getElementById('auth-section').style.display = 'block';
+      document.getElementById('user-section').style.display = 'none';
+      document.getElementById('admin-badge').style.display = 'none';
+    }
+    renderNews();
+  }
+
+  function logout() {
+    currentUser = null;
+    updateUIAuth();
+  }
+
+  // Tự động quét và lọc xóa các tin nhắn quá 24h
+  function cleanExpiredNews() {
+    let list = JSON.parse(localStorage.getItem('to4_news') || '[]');
+    const now = Date.now();
+    const ONE_DAY_MS = 24 * 60 * 60 * 1000; // 24 giờ
+    const filteredList = list.filter(item => (now - item.timestamp) < ONE_DAY_MS);
+    localStorage.setItem('to4_news', JSON.stringify(filteredList));
+    return filteredList;
+  }
+
+  function addNews() {
+    if (!currentUser) {
+      alert("Vui lòng đăng nhập Google để đăng tin!");
+      return;
+    }
+    const title = document.getElementById('post-title').value.trim();
+    const content = document.getElementById('post-content').value.trim();
+    const fileUrl = document.getElementById('post-file').value.trim();
+
+    if (!title || !content) {
+      alert("Vui lòng nhập đầy đủ tiêu đề và nội dung.");
+      return;
+    }
+
+    const newItem = {
+      id: Date.now(),
+      title: title,
+      content: content,
+      fileUrl: fileUrl,
+      authorName: currentUser.name,
+      authorEmail: currentUser.email,
+      timestamp: Date.now()
+    };
+
+    let list = JSON.parse(localStorage.getItem('to4_news') || '[]');
+    list.unshift(newItem);
+    localStorage.setItem('to4_news', JSON.stringify(list));
+
+    // Reset Form
+    document.getElementById('post-title').value = '';
+    document.getElementById('post-content').value = '';
+    document.getElementById('post-file').value = '';
+
+    renderNews();
+  }
+
+  function deleteNews(id) {
+    if (!currentUser || !currentUser.isAdmin) {
+      alert("Chỉ Quản trị viên (06.08.2012.minhdat@gmail.com) mới có quyền xóa tin!");
+      return;
+    }
+    if (confirm("Bạn có chắc chắn muốn xóa tin nhắn này ngay lập tức?")) {
+      let list = JSON.parse(localStorage.getItem('to4_news') || '[]');
+      list = list.filter(item => item.id !== id);
+      localStorage.setItem('to4_news', JSON.stringify(list));
+      renderNews();
+    }
   }
 
   function renderNews() {
-    var listEl = document.getElementById('newsList');
-    var localNews = loadLocalNews();
-    // Tin mới nhất (localStorage) hiện lên đầu, tin cố định hiện sau.
-    var all = localNews.concat(staticNews);
-    listEl.innerHTML = '';
-    all.forEach(function (item) {
-      var card = document.createElement('div');
-      card.className = 'news-card';
-      var linkHtml = item.link
-        ? '<a class="news-link" href="' + item.link + '" target="_blank" rel="noopener noreferrer">Xem link →</a>'
-        : '';
-      // Tệp upload: nếu là ảnh thì hiện xem trước, còn lại hiện nút tải xuống.
-      var fileHtml = '';
-      if (item.file && item.file.dataUrl) {
-        if (item.file.type && item.file.type.indexOf('image/') === 0) {
-          fileHtml =
-            '<a href="' + item.file.dataUrl + '" download="' + item.file.name + '">' +
-              '<img class="file-thumb" src="' + item.file.dataUrl + '" alt="' + item.file.name + '">' +
-            '</a>';
-        } else {
-          fileHtml =
-            '<a class="news-file" href="' + item.file.dataUrl + '" download="' + item.file.name + '">' +
-              '📎 Tải tệp: ' + item.file.name +
-            '</a>';
-        }
-      }
-      card.innerHTML =
-        '<div class="news-top">' +
-          '<p class="news-title">' + item.title + '</p>' +
-          '<span class="news-date">' + item.date + '</span>' +
-        '</div>' +
-        '<p class="news-desc">' + item.desc + '</p>' +
-        linkHtml + fileHtml;
-      listEl.appendChild(card);
-    });
-  }
+    const list = cleanExpiredNews();
+    const container = document.getElementById('news-list');
+    container.innerHTML = '';
 
-  renderNews();
-
-  /* ============ FORM THÊM TIN MỚI (lưu localStorage, chỉ để xem thử) ============
-     Tệp tải lên được đọc thành base64 (data URL) và lưu chung vào localStorage,
-     vì trang tĩnh không có server để giữ tệp thật. Giới hạn dung lượng để tránh
-     localStorage bị đầy (mỗi trình duyệt thường chỉ cho ~5–10MB tổng cộng). */
-  var MAX_FILE_BYTES = 3 * 1024 * 1024; // ~3MB mỗi tệp
-  var fileInput = document.getElementById('newsFile');
-  var fileHint = document.getElementById('fileHint');
-
-  fileInput.addEventListener('change', function () {
-    var f = fileInput.files[0];
-    if (!f) {
-      fileHint.textContent = 'Giới hạn khoảng 3MB/tệp (do lưu tạm trong trình duyệt).';
+    if (list.length === 0) {
+      container.innerHTML = '<p style="color: #94a3b8;">Chưa có thông báo nào trong 24h qua.</p>';
       return;
     }
-    if (f.size > MAX_FILE_BYTES) {
-      fileHint.textContent = 'Tệp "' + f.name + '" quá 3MB, vui lòng chọn tệp nhỏ hơn hoặc dùng link ở trên.';
-      fileInput.value = '';
-    } else {
-      fileHint.textContent = 'Đã chọn: ' + f.name + ' (' + Math.round(f.size / 1024) + ' KB)';
-    }
-  });
 
-  function readFileAsDataUrl(file) {
-    return new Promise(function (resolve, reject) {
-      var reader = new FileReader();
-      reader.onload = function () { resolve(reader.result); };
-      reader.onerror = function () { reject(reader.error); };
-      reader.readAsDataURL(file);
+    list.forEach(item => {
+      const dateStr = new Date(item.timestamp).toLocaleString('vi-VN');
+      const hasFile = item.fileUrl && item.fileUrl.length > 0;
+      
+      const html = `
+        <div class="news-item">
+          <div class="news-header">
+            <span>👤 <strong>${item.authorName}</strong></span>
+            <span>• ${dateStr}</span>
+          </div>
+          <div class="news-title">${item.title}</div>
+          <div>${item.content}</div>
+          ${hasFile ? `
+            <a href="${item.fileUrl}" target="_blank" class="file-attachment" download>
+              📥 <strong>Tải file / Xem đính kèm</strong>
+            </a>
+          ` : ''}
+          ${(currentUser && currentUser.isAdmin) ? `
+            <div class="actions">
+              <button class="btn btn-danger" onclick="deleteNews(${item.id})">🗑️ Xóa (Admin)</button>
+            </div>
+          ` : ''}
+        </div>
+      `;
+      container.innerHTML += html;
     });
   }
 
-  document.getElementById('newsForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    var title = document.getElementById('newsTitle').value.trim();
-    var content = document.getElementById('newsContent').value.trim();
-    var link = document.getElementById('newsLink').value.trim();
-    if (!title || !content) return;
-
-    var file = fileInput.files[0];
-
-    function finishSaving(fileAttachment) {
-      var today = new Date();
-      var dateStr = String(today.getDate()).padStart(2, '0') + '/' +
-                    String(today.getMonth() + 1).padStart(2, '0') + '/' +
-                    today.getFullYear();
-
-      var localNews = loadLocalNews();
-      localNews.unshift({
-        title: title,
-        date: dateStr,
-        desc: content,
-        link: link,
-        file: fileAttachment || null
-      });
-      try {
-        saveLocalNews(localNews);
-      } catch (err) {
-        fileHint.textContent = 'Không lưu được (có thể tệp quá lớn cho bộ nhớ trình duyệt).';
-        return;
-      }
-      renderNews();
-      e.target.reset();
-      fileHint.textContent = 'Giới hạn khoảng 3MB/tệp (do lưu tạm trong trình duyệt).';
-    }
-
-    if (file) {
-      readFileAsDataUrl(file).then(function (dataUrl) {
-        finishSaving({ name: file.name, type: file.type, dataUrl: dataUrl });
-      }).catch(function () {
-        finishSaving(null);
-      });
-    } else {
-      finishSaving(null);
-    }
-  });
+  // Khởi chạy khi tải trang
+  renderNews();
 </script>
+
 </body>
 </html>
